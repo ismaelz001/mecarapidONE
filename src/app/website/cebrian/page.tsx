@@ -3,6 +3,15 @@ import Link from 'next/link';
 export default function CebrianLandingPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0A0D0C' }}>
+      {/* Inline styles for hover effects */}
+      <style>{`
+        .cebrian-link:hover { color: #009AD6 !important; }
+        .cebrian-btn:hover { background-color: #037FB4 !important; }
+        .cebrian-btn-dark:hover { background-color: #1a1d1c !important; }
+        .cebrian-card:hover { border-color: #037FB4 !important; }
+        .cebrian-btn-outline:hover { background-color: rgba(0, 154, 214, 0.1) !important; }
+      `}</style>
+
       {/* Header */}
       <header className="border-b" style={{ borderColor: '#009AD6' }}>
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -20,23 +29,21 @@ export default function CebrianLandingPage() {
           <nav className="hidden md:flex items-center gap-6">
             <Link 
               href="/website/cebrian/servicios" 
-              className="text-sm uppercase tracking-wide transition-colors"
+              className="cebrian-link text-sm uppercase tracking-wide transition-colors"
               style={{ color: '#D7DBDD' }}
-              onMouseOver={(e) => e.currentTarget.style.color = '#009AD6'}
-              onMouseOut={(e) => e.currentTarget.style.color = '#D7DBDD'}
             >
               Servicios
             </Link>
             <Link 
               href="/website/cebrian/contacto" 
-              className="text-sm uppercase tracking-wide transition-colors"
+              className="cebrian-link text-sm uppercase tracking-wide transition-colors"
               style={{ color: '#D7DBDD' }}
             >
               Contacto
             </Link>
             <Link 
               href="/website/cebrian/reserva" 
-              className="px-4 py-2 font-bold uppercase tracking-wide text-sm transition-colors"
+              className="cebrian-btn px-4 py-2 font-bold uppercase tracking-wide text-sm transition-colors"
               style={{ backgroundColor: '#009AD6', color: '#0A0D0C' }}
             >
               Reservar Cita
@@ -44,7 +51,7 @@ export default function CebrianLandingPage() {
           </nav>
           <Link 
             href="/website/cebrian/reserva" 
-            className="md:hidden px-4 py-2 font-bold uppercase tracking-wide text-sm"
+            className="cebrian-btn md:hidden px-4 py-2 font-bold uppercase tracking-wide text-sm transition-colors"
             style={{ backgroundColor: '#009AD6', color: '#0A0D0C' }}
           >
             Reservar
@@ -69,7 +76,7 @@ export default function CebrianLandingPage() {
           </p>
           <Link 
             href="/website/cebrian/reserva"
-            className="inline-block px-8 py-4 font-bold uppercase tracking-wide text-lg transition-colors"
+            className="cebrian-btn inline-block px-8 py-4 font-bold uppercase tracking-wide text-lg transition-colors"
             style={{ backgroundColor: '#009AD6', color: '#0A0D0C' }}
           >
             Reservar Cita
@@ -95,7 +102,7 @@ export default function CebrianLandingPage() {
             ].map((service, i) => (
               <div 
                 key={i} 
-                className="p-6 border transition-colors"
+                className="cebrian-card p-6 border transition-colors"
                 style={{ 
                   borderColor: '#009AD6', 
                   backgroundColor: 'rgba(0, 154, 214, 0.05)' 
@@ -114,7 +121,7 @@ export default function CebrianLandingPage() {
           <div className="text-center mt-8">
             <Link 
               href="/website/cebrian/servicios"
-              className="inline-block px-6 py-3 border font-bold uppercase tracking-wide text-sm transition-colors"
+              className="cebrian-btn-outline inline-block px-6 py-3 border font-bold uppercase tracking-wide text-sm transition-colors"
               style={{ borderColor: '#009AD6', color: '#009AD6' }}
             >
               Ver Todos los Servicios
@@ -137,7 +144,7 @@ export default function CebrianLandingPage() {
           </p>
           <Link 
             href="/website/cebrian/reserva"
-            className="inline-block px-8 py-4 font-bold uppercase tracking-wide text-lg transition-colors"
+            className="cebrian-btn-dark inline-block px-8 py-4 font-bold uppercase tracking-wide text-lg transition-colors"
             style={{ backgroundColor: '#0A0D0C', color: '#F5F7F6' }}
           >
             Reservar Cita
