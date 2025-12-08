@@ -2,20 +2,47 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { createReserva } from '@/server/reservas';
 
 export default function CebrianReservaPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    // Placeholder: simulate submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
     
-    setSuccess(true);
-    setIsSubmitting(false);
+    const data = {
+      ownerName: formData.get('nombre_cliente') as string,
+      ownerPhone: formData.get('telefono') as string,
+      ownerEmail: undefined,
+      marca: formData.get('marca') as string,
+      modelo: formData.get('modelo') as string,
+      matricula: formData.get('matricula') as string,
+      año: undefined,
+      problema: formData.get('problema') as string,
+      prioridad: 'normal',
+      fechaSugerida: undefined,
+      slug: 'cebrian',
+    };
+
+    try {
+      const result = await createReserva(data);
+      
+      if (result.success) {
+        setSuccess(true);
+      } else {
+        setError(result.error || 'Error al enviar la reserva');
+      }
+    } catch (err) {
+      setError('Error al enviar la reserva. Inténtalo de nuevo.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (success) {
@@ -47,6 +74,11 @@ export default function CebrianReservaPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0A0D0C' }}>
+      <style>{`
+        .cebrian-btn:hover { background-color: #037FB4 !important; }
+        .cebrian-input:focus { border-color: #037FB4 !important; }
+      `}</style>
+
       {/* Header */}
       <header className="border-b" style={{ borderColor: '#009AD6' }}>
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -78,6 +110,12 @@ export default function CebrianReservaPage() {
             Completa el formulario y te contactaremos
           </p>
 
+          {error && (
+            <div className="mb-6 p-4 border" style={{ borderColor: '#ff4444', backgroundColor: 'rgba(255, 68, 68, 0.1)', color: '#ff4444' }}>
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Client Info */}
             <div className="p-6 border" style={{ borderColor: '#009AD6', backgroundColor: 'rgba(0, 154, 214, 0.05)' }}>
@@ -94,7 +132,7 @@ export default function CebrianReservaPage() {
                     name="nombre_cliente"
                     required
                     placeholder="Tu nombre"
-                    className="w-full px-4 py-3 border outline-none transition-colors"
+                    className="cebrian-input w-full px-4 py-3 border outline-none transition-colors"
                     style={{ 
                       backgroundColor: '#0A0D0C', 
                       borderColor: '#009AD6', 
@@ -111,7 +149,7 @@ export default function CebrianReservaPage() {
                     name="telefono"
                     required
                     placeholder="+34 612 345 678"
-                    className="w-full px-4 py-3 border outline-none transition-colors"
+                    className="cebrian-input w-full px-4 py-3 border outline-none transition-colors"
                     style={{ 
                       backgroundColor: '#0A0D0C', 
                       borderColor: '#009AD6', 
@@ -137,7 +175,7 @@ export default function CebrianReservaPage() {
                     name="marca"
                     required
                     placeholder="Volkswagen"
-                    className="w-full px-4 py-3 border outline-none"
+                    className="cebrian-input w-full px-4 py-3 border outline-none"
                     style={{ 
                       backgroundColor: '#0A0D0C', 
                       borderColor: '#009AD6', 
@@ -154,7 +192,7 @@ export default function CebrianReservaPage() {
                     name="modelo"
                     required
                     placeholder="Golf"
-                    className="w-full px-4 py-3 border outline-none"
+                    className="cebrian-input w-full px-4 py-3 border outline-none"
                     style={{ 
                       backgroundColor: '#0A0D0C', 
                       borderColor: '#009AD6', 
@@ -171,7 +209,7 @@ export default function CebrianReservaPage() {
                     name="matricula"
                     required
                     placeholder="1234 ABC"
-                    className="w-full px-4 py-3 border outline-none uppercase"
+                    className="cebrian-input w-full px-4 py-3 border outline-none uppercase"
                     style={{ 
                       backgroundColor: '#0A0D0C', 
                       borderColor: '#009AD6', 
@@ -196,7 +234,7 @@ export default function CebrianReservaPage() {
                   required
                   rows={4}
                   placeholder="Describe el problema o servicio que necesitas..."
-                  className="w-full px-4 py-3 border outline-none resize-none"
+                  className="cebrian-input w-full px-4 py-3 border outline-none resize-none"
                   style={{ 
                     backgroundColor: '#0A0D0C', 
                     borderColor: '#009AD6', 
@@ -210,7 +248,7 @@ export default function CebrianReservaPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 font-bold uppercase tracking-wide text-lg transition-colors disabled:opacity-50"
+              className="cebrian-btn w-full py-4 font-bold uppercase tracking-wide text-lg transition-colors disabled:opacity-50"
               style={{ backgroundColor: '#009AD6', color: '#0A0D0C' }}
             >
               {isSubmitting ? 'Enviando...' : 'Enviar Reserva'}
