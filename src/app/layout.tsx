@@ -1,6 +1,7 @@
 import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import type { Metadata } from 'next';
+import Providers from '@/components/Providers';
 
 const rajdhani = Rajdhani({ 
   subsets: ['latin'], 
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${rajdhani.className} bg-mr-bg text-mr-text antialiased`}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
