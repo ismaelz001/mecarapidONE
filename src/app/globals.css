@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Industrial scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1513;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a3a35;
+  border: 1px solid #2E604C;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3C735D;
+}
+
+/* Industrial utility classes */
+@layer components {
+  .card-industrial {
+    @apply bg-mr-bg border border-mr-border p-4;
+  }
+
+  .btn-primary {
+    @apply bg-mr-primary hover:bg-mr-secondary text-mr-text px-4 py-2 font-semibold transition-colors duration-150;
+  }
+
+  .btn-accent {
+    @apply bg-mr-accent hover:bg-mr-secondary text-mr-bg px-4 py-2 font-bold transition-colors duration-150;
+  }
+
+  .input-industrial {
+    @apply bg-mr-bg border border-mr-border text-mr-text px-3 py-2 focus:outline-none focus:border-mr-accent;
+  }
+
+  .table-industrial {
+    @apply w-full border-collapse;
+  }
+
+  .table-industrial th {
+    @apply bg-mr-primary text-mr-text text-left px-4 py-3 font-semibold uppercase tracking-wider text-sm;
+  }
+
+  .table-industrial td {
+    @apply border-b border-mr-border px-4 py-3;
+  }
+
+  .table-industrial tr:hover {
+    @apply bg-mr-border/30;
+  }
+}
+
+/* Selection */
+::selection {
+  background: #61D398;
+  color: #0f1513;
+}

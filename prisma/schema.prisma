@@ -1,0 +1,58 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  MECHANIC
+  RECEPTIONIST
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      Role     @default(MECHANIC)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Owner {
+  id        String    @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  vehicles  Vehicle[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Vehicle {
+  id         String      @id @default(cuid())
+  plate      String      @unique
+  brand      String
+  model      String
+  year       Int?
+  km         Int?
+  ownerId    String?
+  owner      Owner?      @relation(fields: [ownerId], references: [id])
+  workOrders WorkOrder[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model WorkOrder {
+  id          String   @id @default(cuid())
+  vehicleId   String
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id])
+  description String
+  priority    String   // "normal" | "urgente"
+  status      String   // "pendiente" | "diagnostico" | "reparando" | "finalizada"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
