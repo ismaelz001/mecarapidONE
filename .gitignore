@@ -42,6 +42,11 @@ prisma/migrations
 *.swp
 *.swo
 
+# TestSprite
+testsprite_tests/
+testsprite_tests/tmp/
+.vscode/mcp.json
+
 # Turbo
 .turbo
 
