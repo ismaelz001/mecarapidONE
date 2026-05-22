@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 // ── Icons ────────────────────────────────────────────────────────────────────
 const IconArrow = () => (
@@ -111,11 +112,15 @@ export default function HomePage() {
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 backdrop-blur-xl" style={{ background: 'rgba(7,9,9,0.85)' }}>
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 md:px-8">
-          <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-md text-[#070909] font-black text-sm" style={{ background: '#61D398' }}>M</span>
-            <span style={{ fontFamily: 'var(--font-oswald)', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.08em', color: '#F4F1EA' }}>
-              MECARAPID
-            </span>
+          <div className="flex items-center">
+            <Image
+              src="/website/img/meta-imagen-7.jpg"
+              alt="mecaRapid"
+              width={160}
+              height={60}
+              className="h-11 w-auto object-contain"
+              priority
+            />
           </div>
           <nav className="hidden items-center gap-8 md:flex">
             {(['Funciones', 'Cómo funciona', 'Precios'] as const).map((item, i) => (
@@ -134,13 +139,23 @@ export default function HomePage() {
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[100dvh] flex-col items-start justify-center overflow-hidden pt-[72px]">
-        {/* Grid background */}
+        {/* Video background */}
+        <video
+          autoPlay muted loop playsInline
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0.35 }}
+        >
+          <source src="/website/intro/meta-video-12.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay + gradient left para legibilidad del texto */}
         <div className="pointer-events-none absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(97,211,152,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(97,211,152,0.04) 1px, transparent 1px)',
+          background: 'linear-gradient(to right, rgba(7,9,9,0.92) 40%, rgba(7,9,9,0.5) 75%, rgba(7,9,9,0.2) 100%)',
+        }} />
+        {/* Grid subtle encima */}
+        <div className="pointer-events-none absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(97,211,152,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(97,211,152,0.03) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }} />
-        {/* Glow */}
-        <div className="pointer-events-none absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #61D398 0%, transparent 70%)' }} />
 
         <div className="relative mx-auto w-full max-w-7xl px-5 py-20 md:px-8 md:py-28">
           <p className="land-hero-1 mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]"
