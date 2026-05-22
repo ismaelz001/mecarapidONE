@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
+import { Plus_Jakarta_Sans, Space_Grotesk, Oswald } from 'next/font/google';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -12,13 +12,19 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 });
 
+const oswald = Oswald({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-oswald',
+});
+
 export default function WebsiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${jakarta.variable} ${spaceGrotesk.variable} font-jakarta bg-site-bg text-site-text antialiased`}>
+    <div className={`${jakarta.variable} ${spaceGrotesk.variable} ${oswald.variable} font-jakarta bg-site-bg text-site-text antialiased`}>
       {children}
     </div>
   );

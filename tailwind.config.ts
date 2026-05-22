@@ -29,6 +29,7 @@ const config: Config = {
         rajdhani: ['Rajdhani', 'sans-serif'],
         jakarta:  ['var(--font-jakarta)', 'sans-serif'],
         display:  ['var(--font-space-grotesk)', 'sans-serif'],
+        oswald:   ['var(--font-oswald)', 'sans-serif'],
       },
     },
   },

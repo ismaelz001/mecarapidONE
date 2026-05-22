@@ -56,3 +56,5 @@ testsprite_tests/tmp/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
