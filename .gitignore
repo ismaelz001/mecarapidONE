@@ -50,6 +50,9 @@ testsprite_tests/tmp/
 # Turbo
 .turbo
 
+# Local verification artifacts
+.artifacts/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts

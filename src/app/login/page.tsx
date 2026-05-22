@@ -15,12 +15,12 @@ export default function LoginPage() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
+    const username = formData.get('username') as string;
     const password = formData.get('password') as string;
 
     try {
       const result = await signIn('credentials', {
-        email,
+        username,
         password,
         redirect: false,
       });
@@ -69,15 +69,17 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-mr-text/60 uppercase tracking-wide mb-2">
-                Email
+                Usuario
               </label>
               <input
-                type="email"
-                name="email"
+                type="text"
+                name="username"
                 required
-                placeholder="usuario@mecarapid.com"
+                placeholder="admin, owner, office o mechanic"
                 className="input-industrial w-full"
-                autoComplete="email"
+                autoComplete="username"
+                autoCapitalize="none"
+                spellCheck={false}
               />
             </div>
 

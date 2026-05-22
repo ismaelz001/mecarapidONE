@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
+import { getCurrentUser } from '@/lib/session';
 import { revalidatePath } from 'next/cache';
 
 export interface WorkOrderWithRelations {
@@ -26,9 +27,17 @@ export interface WorkOrderWithRelations {
   };
 }
 
+function getWorkshopFilter(workshopId?: string | null) {
+  return workshopId ? { workshopId } : {};
+}
+
 export async function getWorkOrders(): Promise<WorkOrderWithRelations[]> {
   try {
-    const workOrders = await prisma.workOrder.findMany({
+    const user = await getCurrentUser();
+    const workshopId = user?.workshopId ?? null;
+
+    return await prisma.workOrder.findMany({
+      where: getWorkshopFilter(workshopId),
       include: {
         vehicle: {
           include: {
@@ -40,17 +49,24 @@ export async function getWorkOrders(): Promise<WorkOrderWithRelations[]> {
         createdAt: 'desc',
       },
     });
-    return workOrders;
   } catch (error) {
     console.error('Error fetching work orders:', error);
     return [];
   }
 }
 
-export async function getWorkOrderById(id: string): Promise<WorkOrderWithRelations | null> {
+export async function getWorkOrderById(
+  id: string
+): Promise<WorkOrderWithRelations | null> {
   try {
-    const workOrder = await prisma.workOrder.findUnique({
-      where: { id },
+    const user = await getCurrentUser();
+    const workshopId = user?.workshopId ?? null;
+
+    return await prisma.workOrder.findFirst({
+      where: {
+        id,
+        ...getWorkshopFilter(workshopId),
+      },
       include: {
         vehicle: {
           include: {
@@ -59,7 +75,6 @@ export async function getWorkOrderById(id: string): Promise<WorkOrderWithRelatio
         },
       },
     });
-    return workOrder;
   } catch (error) {
     console.error('Error fetching work order:', error);
     return null;
@@ -79,18 +94,33 @@ interface CreateWorkOrderData {
   priority: string;
 }
 
-export async function createWorkOrder(data: CreateWorkOrderData): Promise<{ success: boolean; error?: string; workOrderId?: string }> {
+export async function createWorkOrder(
+  data: CreateWorkOrderData
+): Promise<{ success: boolean; error?: string; workOrderId?: string }> {
   try {
-    // 1. Find or create owner
+    const user = await getCurrentUser();
+    const workshopId = user?.workshopId ?? null;
+    const plate = data.plate.toUpperCase().replace(/\s/g, '');
+    const plateRegex = /^[0-9]{4}[A-Z]{3}$/;
+
+    if (!plateRegex.test(plate)) {
+      return {
+        success: false,
+        error: 'Matricula invalida. Formato correcto: 1234ABC',
+      };
+    }
+
     let owner = await prisma.owner.findFirst({
       where: {
         phone: data.ownerPhone,
+        workshopId,
       },
     });
 
     if (!owner) {
       owner = await prisma.owner.create({
         data: {
+          workshopId,
           name: data.ownerName,
           phone: data.ownerPhone,
           email: data.ownerEmail || null,
@@ -98,17 +128,18 @@ export async function createWorkOrder(data: CreateWorkOrderData): Promise<{ succ
       });
     }
 
-    // 2. Find or create vehicle
-    let vehicle = await prisma.vehicle.findUnique({
+    let vehicle = await prisma.vehicle.findFirst({
       where: {
-        plate: data.plate.toUpperCase(),
+        plate,
+        workshopId,
       },
     });
 
     if (!vehicle) {
       vehicle = await prisma.vehicle.create({
         data: {
-          plate: data.plate.toUpperCase(),
+          workshopId,
+          plate,
           brand: data.brand,
           model: data.model,
           year: data.year || null,
@@ -117,19 +148,19 @@ export async function createWorkOrder(data: CreateWorkOrderData): Promise<{ succ
         },
       });
     } else {
-      // Update vehicle info if it already exists
       vehicle = await prisma.vehicle.update({
         where: { id: vehicle.id },
         data: {
-          km: data.km || vehicle.km,
+          km: data.km ?? vehicle.km,
           ownerId: owner.id,
+          workshopId,
         },
       });
     }
 
-    // 3. Create work order
     const workOrder = await prisma.workOrder.create({
       data: {
+        workshopId,
         vehicleId: vehicle.id,
         description: data.description,
         priority: data.priority,
@@ -150,12 +181,23 @@ export async function updateWorkOrderStatus(
   status: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    await prisma.workOrder.update({
-      where: { id },
+    const user = await getCurrentUser();
+    const workshopId = user?.workshopId ?? null;
+
+    const result = await prisma.workOrder.updateMany({
+      where: {
+        id,
+        ...getWorkshopFilter(workshopId),
+      },
       data: { status },
     });
 
+    if (result.count === 0) {
+      return { success: false, error: 'Orden no encontrada' };
+    }
+
     revalidatePath('/work-orders');
+    revalidatePath(`/work-orders/${id}`);
     return { success: true };
   } catch (error) {
     console.error('Error updating work order status:', error);
@@ -163,11 +205,23 @@ export async function updateWorkOrderStatus(
   }
 }
 
-export async function deleteWorkOrder(id: string): Promise<{ success: boolean; error?: string }> {
+export async function deleteWorkOrder(
+  id: string
+): Promise<{ success: boolean; error?: string }> {
   try {
-    await prisma.workOrder.delete({
-      where: { id },
+    const user = await getCurrentUser();
+    const workshopId = user?.workshopId ?? null;
+
+    const result = await prisma.workOrder.deleteMany({
+      where: {
+        id,
+        ...getWorkshopFilter(workshopId),
+      },
     });
+
+    if (result.count === 0) {
+      return { success: false, error: 'Orden no encontrada' };
+    }
 
     revalidatePath('/work-orders');
     return { success: true };

@@ -74,7 +74,7 @@ export default function WorkOrderList({ workOrders }: WorkOrderListProps) {
       <table className="table-industrial">
         <thead>
           <tr>
-            <th>Patente</th>
+            <th>Matricula</th>
             <th>Vehículo</th>
             <th>Propietario</th>
             <th>Descripción</th>

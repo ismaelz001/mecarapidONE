@@ -1,8 +1,9 @@
-import { Rajdhani } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 
-const rajdhani = Rajdhani({ 
-  subsets: ['latin'], 
-  weight: ['400', '500', '600', '700'],
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
 });
 
 export default function CebrianLayout({
@@ -11,7 +12,7 @@ export default function CebrianLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={rajdhani.className}>
+    <div className={`${jakarta.variable} font-jakarta`}>
       {children}
     </div>
   );

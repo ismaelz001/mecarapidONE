@@ -1,0 +1,192 @@
+
+> mecarapidone@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+  ▲ Next.js 14.2.33
+  - Local:        http://127.0.0.1:3000
+  - Network:      http://127.0.0.1:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling /website/[slug] ...
+ ✓ Compiled /website/[slug] in 4.9s (692 modules)
+ ✓ Compiled in 432ms (321 modules)
+ GET /website/demo 200 in 6336ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 1822ms (582 modules)
+ GET /api/auth/session 200 in 2856ms
+ GET /api/auth/session 200 in 24ms
+ GET /website/demo 200 in 165ms
+ GET /api/auth/session 200 in 34ms
+ GET /api/auth/session 200 in 11ms
+ GET /website/demo 200 in 64ms
+ GET /api/auth/session 200 in 134ms
+ GET /api/auth/session 200 in 38ms
+ ✓ Compiled in 138ms (344 modules)
+ GET /website/demo 200 in 177ms
+ ✓ Compiled /api/auth/[...nextauth] in 201ms (582 modules)
+ GET /api/auth/session 200 in 369ms
+ GET /api/auth/session 200 in 8ms
+ GET /website/demo 200 in 127ms
+ GET /api/auth/session 200 in 71ms
+ GET /api/auth/session 200 in 33ms
+ GET /website/demo 200 in 68ms
+ GET /api/auth/session 200 in 31ms
+ GET /api/auth/session 200 in 9ms
+ GET /api/auth/session 200 in 11ms
+ ✓ Compiled in 656ms (665 modules)
+ ✓ Compiled in 563ms (665 modules)
+ GET /website/demo 200 in 135ms
+ ✓ Compiled /api/auth/[...nextauth] in 145ms (582 modules)
+ GET /api/auth/session 200 in 352ms
+ GET /api/auth/session 200 in 9ms
+ ○ Compiling /website/[slug]/reserva ...
+ ✓ Compiled /website/[slug]/reserva in 1101ms (945 modules)
+ ✓ Compiled in 603ms (959 modules)
+ ✓ Compiled in 568ms (959 modules)
+ GET /website/demo 200 in 141ms
+ GET /api/auth/session 200 in 125ms
+ GET /api/auth/session 200 in 14ms
+ GET /website/demo 200 in 60ms
+ GET /api/auth/session 200 in 48ms
+ GET /api/auth/session 200 in 18ms
+ ✓ Compiled in 563ms (959 modules)
+ GET /website/demo 200 in 145ms
+ GET /api/auth/session 200 in 35ms
+ GET /api/auth/session 200 in 10ms
+ GET /website/demo 200 in 67ms
+ GET /api/auth/session 200 in 24ms
+ GET /api/auth/session 200 in 9ms
+ ✓ Compiled in 403ms (959 modules)
+ GET /website/demo 200 in 89ms
+ GET /website/demo 200 in 82ms
+ GET /api/auth/session 200 in 31ms
+ GET /api/auth/session 200 in 13ms
+ GET /api/auth/session 200 in 25ms
+ GET /api/auth/session 200 in 15ms
+ GET /website/demo 200 in 54ms
+ GET /api/auth/session 200 in 46ms
+ GET /api/auth/session 200 in 22ms
+ GET /website/demo 200 in 91ms
+ GET /api/auth/session 200 in 25ms
+ GET /api/auth/session 200 in 12ms
+ ✓ Compiled in 472ms (959 modules)
+ GET /website/demo 200 in 63ms
+ GET /api/auth/session 200 in 43ms
+ GET /api/auth/session 200 in 18ms
+ GET /website/demo 200 in 54ms
+ GET /api/auth/session 200 in 21ms
+ GET /api/auth/session 200 in 9ms
+ GET /website/demo 200 in 58ms
+ GET /api/auth/session 200 in 32ms
+ GET /api/auth/session 200 in 12ms
+ GET /website/demo 200 in 82ms
+ GET /api/auth/session 200 in 30ms
+ GET /api/auth/session 200 in 11ms
+ ✓ Compiled in 397ms (959 modules)
+ GET /website/demo 200 in 83ms
+ GET /api/auth/session 200 in 69ms
+ GET /api/auth/session 200 in 176ms
+ GET /website/demo 200 in 412ms
+ GET /api/auth/session 200 in 41ms
+ GET /api/auth/session 200 in 19ms
+ GET /website/demo 200 in 71ms
+ GET /api/auth/session 200 in 27ms
+ GET /api/auth/session 200 in 10ms
+ GET /website/demo 200 in 61ms
+ GET /api/auth/session 200 in 25ms
+ GET /api/auth/session 200 in 10ms
+ GET /website/demo 200 in 81ms
+ GET /api/auth/session 200 in 37ms
+ GET /api/auth/session 200 in 78ms
+ GET /website/demo 200 in 183ms
+ GET /api/auth/session 200 in 23ms
+ GET /api/auth/session 200 in 11ms
+ GET /api/auth/session 200 in 11ms
+ ✓ Compiled in 306ms (327 modules)
+ ✓ Compiled in 594ms (710 modules)
+ ✓ Compiled in 517ms (724 modules)
+ ✓ Compiled in 447ms (724 modules)
+ ✓ Compiled in 941ms (724 modules)
+ ✓ Compiled in 446ms (724 modules)
+ ✓ Compiled in 618ms (724 modules)
+ ✓ Compiled in 352ms (724 modules)
+ ✓ Compiled in 540ms (724 modules)
+ GET /website/demo 200 in 130ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 971ms (634 modules)
+ GET /api/auth/session 200 in 1310ms
+ GET /api/auth/session 200 in 13ms
+ GET /website/demo 200 in 164ms
+ GET /api/auth/session 200 in 40ms
+ GET /api/auth/session 200 in 13ms
+ ✓ Compiled in 460ms (962 modules)
+ GET /website/demo 200 in 153ms
+ GET /website/demo 200 in 110ms
+ GET /api/auth/session 200 in 54ms
+ GET /api/auth/session 200 in 53ms
+ GET /api/auth/session 200 in 10ms
+ GET /api/auth/session 200 in 10ms
+ GET /website/demo 200 in 59ms
+ GET /api/auth/session 200 in 24ms
+ GET /api/auth/session 200 in 10ms
+ ✓ Compiled in 452ms (962 modules)
+ GET /website/demo 200 in 84ms
+ GET /website/demo 200 in 118ms
+ GET /api/auth/session 200 in 38ms
+ GET /api/auth/session 200 in 38ms
+ GET /api/auth/session 200 in 13ms
+ GET /api/auth/session 200 in 22ms
+ GET /website/demo 200 in 72ms
+ GET /api/auth/session 200 in 47ms
+ GET /api/auth/session 200 in 9ms
+ GET /website/demo 200 in 59ms
+ GET /api/auth/session 200 in 29ms
+ GET /api/auth/session 200 in 10ms
+ ✓ Compiled /login in 373ms (716 modules)
+ ✓ Compiled /api/auth/[...nextauth] in 171ms (638 modules)
+ GET /api/auth/providers 200 in 354ms
+ GET /api/auth/csrf 200 in 9ms
+prisma:query SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."name", "public"."User"."role"::text, "public"."User"."emailVerified", "public"."User"."image", "public"."User"."createdAt", "public"."User"."updatedAt" FROM "public"."User" WHERE ("public"."User"."email" = $1 AND 1=1) LIMIT $2 OFFSET $3
+ POST /api/auth/callback/credentials 200 in 3305ms
+ GET /api/auth/session 200 in 26ms
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 883ms (174 modules)
+ ✓ Compiled /dashboard in 428ms (966 modules)
+ ✓ Compiled in 138ms (408 modules)
+ ✓ Compiled in 461ms (742 modules)
+ GET /login 200 in 94ms
+ ✓ Compiled /api/auth/[...nextauth] in 228ms (646 modules)
+ GET /api/auth/session 200 in 403ms
+ GET /api/auth/session 200 in 29ms
+ GET /api/auth/providers 200 in 20ms
+ GET /api/auth/csrf 200 in 7ms
+prisma:query SELECT 1
+prisma:query SELECT "public"."User"."id", "public"."User"."email", "public"."User"."password", "public"."User"."name", "public"."User"."role"::text, "public"."User"."emailVerified", "public"."User"."image", "public"."User"."createdAt", "public"."User"."updatedAt" FROM "public"."User" WHERE ("public"."User"."email" = $1 AND 1=1) LIMIT $2 OFFSET $3
+ POST /api/auth/callback/credentials 200 in 184ms
+ GET /api/auth/session 200 in 14ms
+ GET /api/auth/session 200 in 30ms
+ GET /api/auth/session 200 in 33ms
+ GET /dashboard 200 in 108ms
+ GET /api/auth/session 200 in 31ms
+ GET /api/auth/session 200 in 12ms
+ GET /api/auth/csrf 200 in 22ms
+ POST /api/auth/signout 200 in 11ms
+ GET /login 200 in 49ms
+ GET /api/auth/session 200 in 28ms
+ GET /api/auth/session 200 in 15ms
+ GET /login 200 in 53ms
+ GET /api/auth/session 200 in 24ms
+ GET /api/auth/session 200 in 12ms
+ ✓ Compiled / in 368ms (975 modules)
+ GET / 307 in 582ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 52ms
+ GET /login?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 68ms
+ GET /api/auth/session 200 in 14ms
+ GET /api/auth/session 200 in 9ms
+ GET / 307 in 110ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 19ms
+ GET /login?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 71ms
+ GET /api/auth/session 200 in 11ms
+ GET /api/auth/session 200 in 11ms

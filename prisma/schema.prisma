@@ -22,6 +22,8 @@ model User {
   password      String
   name          String?
   role          Role      @default(MECHANIC)
+  workshopId    String?
+  workshop      Workshop? @relation(fields: [workshopId], references: [id])
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -29,6 +31,8 @@ model User {
   workOrders    WorkOrder[] @relation("MechanicWorkOrders")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+  @@index([workshopId])
 }
 
 model Account {
@@ -67,19 +71,70 @@ model VerificationToken {
 }
 
 // ============ BUSINESS MODELS ============
+model Workshop {
+  id           String            @id @default(cuid())
+  slug         String            @unique
+  name         String
+  legalName    String?
+  description  String?
+  phone        String
+  whatsapp     String
+  email        String?
+  address      String?
+  hours        String?
+  logoUrl      String?
+  heroImageUrl String?
+  primaryColor String            @default("#070909")
+  accentColor  String            @default("#61D398")
+  active       Boolean           @default(true)
+  users        User[]
+  owners       Owner[]
+  vehicles     Vehicle[]
+  workOrders   WorkOrder[]
+  services     WorkshopService[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([active])
+}
+
+model WorkshopService {
+  id          String   @id @default(cuid())
+  workshopId  String
+  workshop    Workshop @relation(fields: [workshopId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  price       String?
+  category    String?
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([workshopId, active])
+  @@index([workshopId, order])
+}
+
 model Owner {
   id        String    @id @default(cuid())
+  workshopId String?
+  workshop  Workshop? @relation(fields: [workshopId], references: [id])
   name      String
   phone     String
   email     String?
   vehicles  Vehicle[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  @@index([workshopId])
+  @@index([phone])
 }
 
 model Vehicle {
   id         String      @id @default(cuid())
-  plate      String      @unique
+  workshopId String?
+  workshop   Workshop?   @relation(fields: [workshopId], references: [id])
+  plate      String
   brand      String
   model      String
   year       Int?
@@ -89,10 +144,16 @@ model Vehicle {
   workOrders WorkOrder[]
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
+
+  @@index([workshopId])
+  @@index([plate])
+  @@unique([workshopId, plate])
 }
 
 model WorkOrder {
   id          String   @id @default(cuid())
+  workshopId  String?
+  workshop    Workshop? @relation(fields: [workshopId], references: [id])
   vehicleId   String
   vehicle     Vehicle  @relation(fields: [vehicleId], references: [id])
   description String
@@ -102,4 +163,8 @@ model WorkOrder {
   mechanic    User?    @relation("MechanicWorkOrders", fields: [mechanicId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([workshopId])
+  @@index([status])
+  @@index([priority])
 }

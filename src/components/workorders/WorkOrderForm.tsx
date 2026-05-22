@@ -61,14 +61,20 @@ export default function WorkOrderForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-mr-text/60 uppercase tracking-wide mb-2">
-              Patente *
+              Matricula *
             </label>
             <input
               type="text"
               name="plate"
               required
-              placeholder="ABC123"
+              placeholder="1234ABC"
+               pattern="[0-9]{4}[A-Z]{3}"
+               title="Formato válido: 1234ABC"
+                maxLength={7}
               className="input-industrial w-full uppercase"
+              onChange={(e) => {
+              e.target.value = e.target.value.toUpperCase();
+                }}
             />
           </div>
           <div>
