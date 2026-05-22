@@ -118,10 +118,9 @@ export default function HomePage() {
             </span>
           </div>
           <nav className="hidden items-center gap-8 md:flex">
-            {['Funciones', 'Cómo funciona', 'Precios'].map((item, i) => (
-              <a key={item} href={`#${['features', 'how', 'pricing'][i]}`} className="text-sm font-semibold transition-colors" style={{ color: '#9B9990' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#F4F1EA')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#9B9990')}>
+            {(['Funciones', 'Cómo funciona', 'Precios'] as const).map((item, i) => (
+              <a key={item} href={`#${['features', 'how', 'pricing'][i]}`}
+                className="text-sm font-semibold transition-colors hover:text-[#F4F1EA]" style={{ color: '#9B9990' }}>
                 {item}
               </a>
             ))}
@@ -200,9 +199,7 @@ export default function HomePage() {
 
           <div className="grid gap-px md:grid-cols-2 lg:grid-cols-3" style={{ background: 'rgba(244,241,234,0.06)' }}>
             {features.map((f) => (
-              <div key={f.title} className="group flex flex-col gap-5 p-7 transition-colors" style={{ background: '#070909' }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#0f1513')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#070909')}>
+              <div key={f.title} className="group flex flex-col gap-5 p-7 transition-colors hover:bg-[#0f1513]" style={{ background: '#070909' }}>
                 <span style={{ color: '#61D398' }}>{f.icon}</span>
                 <div>
                   <h3 className="mb-2 font-black" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '1.2rem', color: '#F4F1EA' }}>{f.title}</h3>
