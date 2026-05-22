@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Preloader from '@/components/landing/Preloader';
+import BottomBar from '@/components/landing/BottomBar';
 
 // ── Icons ────────────────────────────────────────────────────────────────────
 const IconArrow = () => (
@@ -107,6 +109,8 @@ const plans = [
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   return (
+    <>
+    <Preloader />
     <div className="min-h-[100dvh] overflow-x-hidden" style={{ background: '#070909', color: '#F4F1EA', fontFamily: 'var(--font-jakarta), sans-serif' }}>
 
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
@@ -326,6 +330,8 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
+    <BottomBar />
+    </>
   );
 }
 
