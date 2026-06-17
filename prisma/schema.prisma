@@ -29,6 +29,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   workOrders    WorkOrder[] @relation("MechanicWorkOrders")
+  diagnosticCases DiagnosticCase[] @relation("DiagnosticCaseCreatedBy")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -92,6 +93,7 @@ model Workshop {
   vehicles     Vehicle[]
   workOrders   WorkOrder[]
   services     WorkshopService[]
+  diagnosticCases DiagnosticCase[]
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
@@ -161,10 +163,34 @@ model WorkOrder {
   status      String   // "pendiente" | "diagnostico" | "reparando" | "finalizada"
   mechanicId  String?
   mechanic    User?    @relation("MechanicWorkOrders", fields: [mechanicId], references: [id])
+  diagnosticCases DiagnosticCase[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([workshopId])
   @@index([status])
   @@index([priority])
+}
+
+model DiagnosticCase {
+  id          String    @id @default(cuid())
+  workshopId  String?
+  workshop    Workshop? @relation(fields: [workshopId], references: [id])
+  workOrderId String
+  workOrder   WorkOrder @relation(fields: [workOrderId], references: [id], onDelete: Cascade)
+  createdById String?
+  createdBy   User?     @relation("DiagnosticCaseCreatedBy", fields: [createdById], references: [id])
+  query       String    @db.Text
+  symptoms    String?   @db.Text
+  dtcCodes    String?
+  testsDone   String?   @db.Text
+  response    Json
+  model       String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([workshopId])
+  @@index([workOrderId])
+  @@index([createdById])
+  @@index([createdAt])
 }

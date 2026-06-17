@@ -1,10 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useSession, signOut } from 'next-auth/react';
 import { Role } from '@prisma/client';
+import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 
 interface NavItem {
   href: string;
@@ -185,6 +186,12 @@ export default function Sidebar() {
               className="w-full text-left px-4 py-2 text-sm text-mr-text/60 hover:text-red-400 hover:bg-red-500/10 transition-colors uppercase tracking-wide"
             >
               Cerrar Sesión
+            </button>
+            <button
+              onClick={() => { clearCookieConsent(); window.location.reload(); }}
+              className="w-full text-left px-4 py-2 text-xs text-mr-text/40 hover:text-mr-text/60 transition-colors"
+            >
+              Gestionar cookies
             </button>
           </div>
         ) : (

@@ -2,6 +2,9 @@
   "name": "mecarapidone",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
     "visual:website": "node scripts/visual-check.mjs http://127.0.0.1:3000/website/demo",

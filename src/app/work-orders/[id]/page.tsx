@@ -1,6 +1,8 @@
 import Shell from '@/components/layout/Shell';
-import { getWorkOrderById, updateWorkOrderStatus, deleteWorkOrder } from '@/server/workorders';
-import { notFound, redirect } from 'next/navigation';
+import DiagnosticAssistant from '@/components/diagnostics/DiagnosticAssistant';
+import { getDiagnosticCases } from '@/server/diagnostics';
+import { getWorkOrderById } from '@/server/workorders';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import WorkOrderStatusUpdater from './StatusUpdater';
 
@@ -9,7 +11,10 @@ interface PageProps {
 }
 
 export default async function WorkOrderDetailPage({ params }: PageProps) {
-  const workOrder = await getWorkOrderById(params.id);
+  const [workOrder, diagnosticCases] = await Promise.all([
+    getWorkOrderById(params.id),
+    getDiagnosticCases(params.id),
+  ]);
 
   if (!workOrder) {
     notFound();
@@ -103,6 +108,10 @@ export default async function WorkOrderDetailPage({ params }: PageProps) {
               )}
             </div>
           </div>
+          <DiagnosticAssistant
+            workOrderId={workOrder.id}
+            initialCases={diagnosticCases}
+          />
         </div>
 
         {/* Sidebar */}

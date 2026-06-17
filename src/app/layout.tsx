@@ -1,7 +1,7 @@
-import { Rajdhani, Oswald, Space_Grotesk, Plus_Jakarta_Sans } from 'next/font/google';
-import './globals.css';
-import type { Metadata } from 'next';
 import Providers from '@/components/Providers';
+import type { Metadata } from 'next';
+import { Oswald, Plus_Jakarta_Sans, Rajdhani, Space_Grotesk } from 'next/font/google';
+import './globals.css';
 
 const rajdhani = Rajdhani({ 
   subsets: ['latin'], 
@@ -43,6 +43,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <CookieBannerWrapper />
       </body>
     </html>
   );
